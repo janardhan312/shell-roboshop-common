@@ -49,6 +49,27 @@ nodejs_setup(){
 
 }
 
+java_setup(){
+    dnf install maven -y  &>>$LOG_FILE
+    VALIDATE $? "installing maven"
+
+    mvn clean package  &>>$LOG_FILE
+    VALIDATE $? "installing maven packages"
+
+    mv target/shipping-1.0.jar shipping.jar  &>>$LOG_FILE
+    VALIDATE $? "renaming the artifacts"
+
+}
+
+python_setup(){
+    dnf install python3 gcc python3-devel -y  &>>$LOG_FILE
+    VALIDATE $? "installing python"
+
+    pip3 install -r requirements.txt
+    VALIDATE $? "python dependency"
+
+}
+
 
 
 app_setup(){
